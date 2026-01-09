@@ -952,19 +952,12 @@
 
 
 /* ------------------------------ franja de color final ------------------------------ */
-.footer-simple {
-    background-color: var(--color-principal-oscuro);
-    height: 70px; 
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--blanco);
-    font-family: var(--fuente-principal);
-    font-size: 0.85rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
+footer { background: var(--color-principal-oscuro); color: var(--blanco); padding: 40px 20px; }
+.footer-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.footer-logo { height: 40px; filter: brightness(100); }
+.footer-social { display: flex; gap: 15px; }
+.btn-social { color: var(--blanco); border: 1px solid rgba(255,255,255,0.3); padding: 8px 15px; border-radius: 20px; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+.btn-social:hover { background: var(--blanco); color: var(--color-principal-oscuro); }
 
 
 
@@ -1036,3 +1029,41 @@
     /* cierre */
     .cierre-pagina {padding: 100px 0 !important;}
 }
+
+/* =========================================================
+   LÓGICA DE VISIBILIDAD DE PLANES (MASTER TEMPLATE)
+   ========================================================= */
+
+/* 1. SI EL PLAN ES ESTÁNDAR */
+/* Ocultamos todo lo que sea intermedio y premium */
+[data-plan="estandar"] .solo-intermedio,
+[data-plan="estandar"] .solo-premium {
+    display: none !important;
+}
+/* Aseguramos que se vea lo específico de estándar (ej. botón WhatsApp) */
+[data-plan="estandar"] .solo-estandar {
+    display: flex !important; /* O block, según corresponda */
+}
+
+
+/* 2. SI EL PLAN ES INTERMEDIO */
+/* Ocultamos lo premium */
+[data-plan="intermedio"] .solo-premium {
+    display: none !important;
+}
+/* Ocultamos lo exclusivo de estándar (si hubiera algo que en intermedio cambia) */
+/* En este caso, dejamos el botón de WhatsApp visible en intermedio también, 
+   o si prefieres que Intermedio ya tenga formulario, descomenta abajo: */
+/* [data-plan="intermedio"] .solo-estandar { display: none !important; } */
+
+
+/* 3. SI EL PLAN ES PREMIUM */
+/* Ocultamos lo básico que fue reemplazado por algo mejor (ej. botón WhatsApp por Formulario) */
+[data-plan="premium"] .solo-estandar {
+    display: none !important;
+}
+
+
+/* ESTILOS EXTRA PARA LA DEMO */
+/* Hacemos que la transición de ocultar no sea brusca si es posible,
+   aunque display:none no anima, el cambio de contenido es instantáneo */

@@ -3,421 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV MELLIS</title>
+    <title>XV MELLIS | Demo</title>
     
-    <!-- ICONO PESTAÑA SITIO -->
     <link rel="icon" type="image/png" href="img/favicon.png">
-    <link rel="apple-touch-icon" href="img/favicon.png">
     
-    <!-- LINKEO FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <!-- LINKEO ICONOS  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- LINKEO CSS  -->
     <link rel="stylesheet" href="css/estilo1.css">
-
-    <!-- PESTAÑA AL COMPARTIR -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://xvmellis.vercel.app/">
-    <meta property="og:title" content="XV MELLIS">
-    <meta property="og:description" content="¡Te invitamos a compartir este momento con nosotras!">
-    <meta property="og:image" content="https://xvmellis.vercel.app/img/compartir.jpg">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://xvmellis.vercel.app/img/compartir.jpg">
 </head>
-<body>
-   <!-------------------------------------------------------------- PORTADA  -------------------------------------------------------------->
+
+<body data-plan="premium">
+
    <section id="primera-p">
         <article id="seccion-primera-pagina">
             <h1>XV MELLIS</h1>
             <p>Queremos que seas parte de este momento especial para nosotras</p>
-            
             <button id="boton-ingresar">Ingresar</button>
         </article>
    </section>
 
-   <!-------------------------------------------------------------- INICIO (empieza oculto)  -------------------------------------------------------------->
-   
-   <!----- boton musica flotante  ----->
    <audio id="musica" loop>
        <source src="audio/fine-line.mp3" type="audio/mpeg">
-    </audio>
-    
-    <section id="contenedor-musica-flotante" style="display: none;">
-        <button id="boton-play-flotante" class="estilo-boton-float">
-            <i class="fas fa-pause"></i>
-        </button>
-    </section>
-    
-    <main id="contenido-principal" style="display: none;">
-        <!----- saludo personalizado con el nombre de la familia ----->   
-        <section id="bienvenida-premium" class="seccion-premium-banner" style="display:none;">
-            <h2 id="nombre-invitado-dinamico">Familia</h2>
-            <p>Nos encantaría compartir este momento.</p>
-        </section>
+   </audio>
+   
+   <section id="contenedor-musica-flotante" class="solo-premium" style="display: none;">
+       <button id="boton-play-flotante" class="estilo-boton-float">
+           <i class="fas fa-pause"></i>
+       </button>
+   </section>
+   
+   <main id="contenido-principal" style="display: none;">
+       
+       <section id="bienvenida-premium" class="seccion-premium-banner solo-premium" style="display:none;">
+           <h2 id="nombre-invitado-dinamico">Familia</h2>
+           <p>Nos encantaría compartir este momento.</p>
+       </section>
 
-        <!----- foto encabezado + cuenta regresiva ----->
-        <section class="tarjeta-portada">
-        
-         <figure class="marco-foto">
-                <img src="img/sesion1.jpg" alt="Foto de sesión de las Mellis en exteriores" class="foto-tarjeta">
-         </figure>
+       <section class="tarjeta-portada">
+        <figure class="marco-foto">
+               <img src="img/sesion1.jpg" alt="Foto portada" class="foto-tarjeta">
+        </figure>
 
-         <article class="info-tarjeta">
-                <h2><strong>XV</strong> MELLIS</h2>
-                <section class="separador-elegante-1"></section>
+        <article class="info-tarjeta">
+               <h2><strong>XV</strong> MELLIS</h2>
+               <section class="separador-elegante-1"></section>
 
-                <section id="cuenta-regresiva" aria-label="Tiempo restante para el evento">
-        
-                    <h2 id="mensaje-contador" class="mensaje-es-hoy"></h2>
+               <section id="cuenta-regresiva" class="solo-intermedio solo-premium" aria-label="Tiempo restante">
+                   <h2 id="mensaje-contador" class="mensaje-es-hoy"></h2>
+                   <ul class="contenedor-contador">
+                       <li id="li-dias" class="caja-tiempo"><span id="dias" class="numero-tiempo">--</span><span class="texto-tiempo">Días</span></li>
+                       <li class="caja-tiempo"><span id="horas" class="numero-tiempo">--</span><span class="texto-tiempo">Hs</span></li>
+                       <li class="caja-tiempo"><span id="minutos" class="numero-tiempo">--</span><span class="texto-tiempo">Min</span></li>
+                       <li class="caja-tiempo"><span id="segundos" class="numero-tiempo">--</span><span class="texto-tiempo">Seg</span></li>
+                   </ul>
+            </section>
+        </article>
+       </section>
 
-                    <ul class="contenedor-contador">
-                        
-                        <li id="li-dias" class="caja-tiempo">
-                            <span id="dias" class="numero-tiempo">--</span>
-                            <span class="texto-tiempo">Días</span>
-                        </li>
-
-                        <li class="caja-tiempo">
-                            <span id="horas" class="numero-tiempo">--</span>
-                            <span class="texto-tiempo">Hs</span>
-                        </li>
-
-                        <li class="caja-tiempo">
-                            <span id="minutos" class="numero-tiempo">--</span>
-                            <span class="texto-tiempo">Min</span>
-                        </li>
-
-                        <li class="caja-tiempo">
-                            <span id="segundos" class="numero-tiempo">--</span>
-                            <span class="texto-tiempo">Seg</span>
-                        </li>
-
-                    </ul>
-             </section>
-          </article>
-        </section>
-
-        <!----- secciones alternadas lugar, fecha y hora ----->
-        <section id="info-evento" class="contenedor-info">
-
-            <article class="bloque-info estilo-oscuro">
-                <section class="icono-animado-container">
-                    <i class="fas fa-map-marker-alt icono-bouncing color-blanco"></i> 
-                </section>
-                <h3>¿DÓNDE?</h3>
-                
-                <section class="detalles-evento">
-                    <p class="nombre-lugar">Salón "Canzonieri Park"</p>
-                    <address>Av. Aconquija 3450, Tucumán</address>
-                </section>
-
-                <a href="https://maps.app.goo.gl/HxoAVPQAm2e16J82A" target="_blank" class="boton-mapa btn-blanco">
-                    VER EN EL MAPA
-                </a>
-            </article>
-
-            
-            <article class="bloque-info estilo-claro">
-                <section class="icono-animado-container">
-                    <article class="calendario-stack icono-swing">
-                        <i class="far fa-calendar color-verde"></i>
-                        <span class="numero-calendario">20</span>
-                    </article>
-                </section>
-                <h3>¿CÚANDO?</h3>
-                
-                <section class="detalles-evento fechayhora">
-                    <p>20 DE MARZO</p>
-                    <p>| 22:00 HASTA 05:00 HS |</p>
-                </section>
-
-                <a id="btn-agendar-calendario" class="boton-mapa btn-oscuro">
-                    AGENDAR
-                </a>
-            </article>
-
-        </section>
-
-        <!-----  carrousel de fotos ----->
-        <section id="galeria-fotos" aria-label="Galería de fotos de la sesión">
-
-            <article class="carrusel-marco-full">
-                
-                <button class="btn-flecha flecha-izq" aria-label="Foto anterior">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
-                <ul class="carrusel-track-auto" id="track-fotos-auto">
-                    
-                    <li class="slide">
-                        <figure>
-                            <img src="img/sesion2.jpg" alt="Sesión de fotos 1" loading="lazy">
-                        </figure>
-                    </li>
-
-                    <li class="slide">
-                        <figure>
-                            <img src="img/sesion3.jpg" alt="Sesión de fotos 2" loading="lazy">
-                        </figure>
-                    </li>
-
-                    <li class="slide">
-                        <figure>
-                            <img src="img/sesion4.jpg" alt="Sesión de fotos 3" loading="lazy">
-                        </figure>
-                    </li>
-
-                    <li class="slide">
-                        <figure>
-                            <img src="img/sesion5.jpg" alt="Sesión de fotos 4" loading="lazy">
-                        </figure>
-                    </li>
-
-                    <li class="slide">
-                        <figure>
-                            <img src="img/sesion6.jpg" alt="Sesión de fotos 4" loading="lazy">
-                        </figure>
-                    </li>
-
-                    <li class="slide">
-                        <figure>
-                            <img src="img/sesion7.jpg" alt="Sesión de fotos 4" loading="lazy">
-                        </figure>
-                    </li>
-
-                    <li class="slide">
-                        <figure>
-                            <img src="img/sesion8.jpg" alt="Sesión de fotos 4" loading="lazy">
-                        </figure>
-                    </li>
-
-                    <li class="slide">
-                        <figure>
-                            <img src="img/sesion9.jpg" alt="Sesión de fotos 4" loading="lazy">
-                        </figure>
-                    </li>
-                </ul>
-
-                <button class="btn-flecha flecha-der" aria-label="Siguiente foto">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-
-            </article>
-     </section>
-
-     <!----- secciones alternadas -----> 
-     <section class="contenedor-info-vertical">
-            <!----- dresscode ----->
-            <article class="bloque-info estilo-oscuro">
-                <section class="icono-animado-container">
-                    <i class="fas fa-user-tie icono-swing color-blanco"></i>
-                </section>
-                <h3>DRESS CODE</h3>
-                <h4 class="texto-dresscode">ELEGANTE</h4>
-                <section class="separador-elegante-2"></section>
-                <p class="nota-dresscode">EL COLOR <strong>BLANCO</strong> SE RESERVA <br> PARA LAS QUINCEAÑERAS</p>
-            </article>
-
-            <!----- link drive fotos ----->
-            <article class="bloque-info estilo-claro">
-                <section class="icono-animado-container">
-                    <i class="fas fa-camera icono-flash color-verde"></i>
-                </section>
-                <h3>MOMENTOS</h3>
-                <p class="texto-detalle">¡Ayudanos a capturar cada instante! Subí tus fotos al álbum compartido.</p>
-                
-                <a href="https://drive.google.com/drive/folders/1b308Al-65Ovrde71vYMNq3J18UKBQK5A?usp=sharing" target="_blank" class="boton-mapa btn-oscuro">
-                    SUBIR FOTOS
-                </a>
-            </article>
-
-            <!----- formulario de confirmación ----->
-            <article class="bloque-info estilo-oscuro">
-                <section class="icono-animado-container">
-                    <i class="fas fa-envelope-open-text icono-bouncing color-blanco"></i>
-                </section>
-                
-                <h3>CONFIRMACIÓN</h3>
-                <p class="texto-detalle">Por favor, confirmanos tu asistencia antes del 10 de Febrero.</p>
-
-                <form id="form-rsvp" class="formulario-rsvp">
-                    <input type="hidden" name="tipoFormulario" value="rsvp">
-                    <section class="full-width">
-                        <p class="texto-detalle"><section id="mensaje-cantidad" style="display:none;">¡ACLARACIÓN! Estas por confirmar la asistencia de <span id="escribir">...</span> personas. En el caso de presentarse una inasistencia, aclarar en el apartado "Mensaje"</section></p>
-                    </section>
-    
-                    <section class="campo-form">
-                        <label for="nombre">Nombre y Apellido</label>
-                        <input type="text" id="nombre" name="nombre" list="lista-invitados" placeholder="Escribe el nombre del invitado..." required autocomplete="off">
-                    
-                        <datalist id="lista-invitados"></datalist>
-        
-                    </section>
-
-                    <input type="hidden" id="cantidad_total" name="cantidad_total" value="1">
-
-                    <section class="campo-form">
-                        <label for="asistencia">¿Podrás asistir?</label>
-                        <select id="asistencia" name="asistencia" required>
-                            <option value="" disabled selected>Seleccioná una opción</option>
-                            <option value="Si, confirmo">¡Sí!</option>
-                            <option value="No podre ir">No :(</option>
-                        </select>
-                    </section>
-
-                    <section class="campo-form full-width">
-                        <label for="mensaje">Mensaje / Restricción Alimentaria</label>
-                        <textarea id="mensaje" name="mensaje" rows="3" placeholder="Soy vegetariano / Celiaquía..."></textarea>
-                    </section>
-
-                    <button type="submit" id="btn-enviar" class="boton-mapa btn-blanco enviar-btn  full-width">
-                        ENVIAR CONFIRMACIÓN
-                    </button>
-                    
-                    <p id="mensaje-exito">
-                        ¡Gracias! Tu confirmación se ha enviado correctamente.
-                    </p>
-                </form>
-            </article>
-
-            <!----- regalos/alias ----->
-            <article class="bloque-info estilo-claro" id="seccion-regalos">
-    
+       <section id="info-evento" class="contenedor-info">
+           <article class="bloque-info estilo-oscuro">
                <section class="icono-animado-container">
-                   <i class="fas fa-gift icono-bouncing color-verde"></i>
+                   <i class="fas fa-map-marker-alt icono-bouncing color-blanco"></i> 
                </section>
+               <h3>¿DÓNDE?</h3>
+               <section class="detalles-evento">
+                   <p class="nombre-lugar">Salón "Canzonieri Park"</p>
+                   <address>Av. Aconquija 3450, Tucumán</address>
+               </section>
+               <a href="https://maps.app.goo.gl/HxoAVPQAm2e16J82A" target="_blank" class="boton-mapa btn-blanco">VER EN EL MAPA</a>
+           </article>
 
-               <h3>REGALOS</h3>
-               <p class="texto-detalle">
-                  El mejor regalo es tu presencia. Pero si deseas hacernos un presente, puedes hacerlo a través de estas cuentas:
-               </p>
+           <article class="bloque-info estilo-claro">
+               <section class="icono-animado-container">
+                   <article class="calendario-stack icono-swing">
+                       <i class="far fa-calendar color-verde"></i>
+                       <span class="numero-calendario">20</span>
+                   </article>
+               </section>
+               <h3>¿CÚANDO?</h3>
+               <section class="detalles-evento fechayhora">
+                   <p>20 DE MARZO</p>
+                   <p>| 22:00 HASTA 05:00 HS |</p>
+               </section>
                
+               <a id="btn-agendar-calendario" class="boton-mapa btn-oscuro solo-intermedio solo-premium">AGENDAR</a>
+           </article>
+       </section>
+
+       <section id="galeria-fotos" class="solo-premium" aria-label="Galería de fotos">
+           <article class="carrusel-marco-full">
+               <button class="btn-flecha flecha-izq"><i class="fas fa-chevron-left"></i></button>
+               <ul class="carrusel-track-auto" id="track-fotos-auto">
+                   <li class="slide"><figure><img src="img/sesion2.jpg" loading="lazy"></figure></li>
+                   <li class="slide"><figure><img src="img/sesion3.jpg" loading="lazy"></figure></li>
+                   <li class="slide"><figure><img src="img/sesion4.jpg" loading="lazy"></figure></li>
+               </ul>
+               <button class="btn-flecha flecha-der"><i class="fas fa-chevron-right"></i></button>
+           </article>
+       </section>
+
+       <section class="contenedor-info-vertical">
+           
+           <article class="bloque-info estilo-oscuro">
+               <section class="icono-animado-container">
+                   <i class="fas fa-user-tie icono-swing color-blanco"></i>
+               </section>
+               <h3>DRESS CODE</h3>
+               <h4 class="texto-dresscode">ELEGANTE</h4>
+               <section class="separador-elegante-2"></section>
+               <p class="nota-dresscode">EL COLOR <strong>BLANCO</strong> SE RESERVA <br> PARA LAS QUINCEAÑERAS</p>
+           </article>
+
+           <article class="bloque-info estilo-claro solo-premium">
+               <section class="icono-animado-container">
+                   <i class="fas fa-camera icono-flash color-verde"></i>
+               </section>
+               <h3>MOMENTOS</h3>
+               <p class="texto-detalle">Subí tus fotos al álbum compartido.</p>
+               <a href="#" target="_blank" class="boton-mapa btn-oscuro">SUBIR FOTOS</a>
+           </article>
+
+           <article class="bloque-info estilo-oscuro solo-premium">
+               <section class="icono-animado-container">
+                   <i class="fas fa-envelope-open-text icono-bouncing color-blanco"></i>
+               </section>
+               <h3>CONFIRMACIÓN</h3>
+               <p class="texto-detalle">Por favor, confirmanos antes del 10 de Febrero.</p>
+
+               <form id="form-rsvp" class="formulario-rsvp">
+                   <input type="hidden" name="tipoFormulario" value="rsvp">
+                   <section class="campo-form">
+                       <input type="text" id="nombre" name="nombre" list="lista-invitados" placeholder="Escribe tu nombre..." required>
+                       <datalist id="lista-invitados"></datalist>
+                   </section>
+                   <input type="hidden" id="cantidad_total" name="cantidad_total" value="1">
+                   <section class="campo-form">
+                       <select id="asistencia" name="asistencia" required>
+                           <option value="" disabled selected>¿Asistirás?</option>
+                           <option value="Si, confirmo">¡Sí!</option>
+                           <option value="No podre ir">No :(</option>
+                       </select>
+                   </section>
+                   <section class="campo-form full-width">
+                       <textarea id="mensaje" name="mensaje" rows="3" placeholder="Mensaje / Dieta..."></textarea>
+                   </section>
+                   <button type="submit" id="btn-enviar" class="boton-mapa btn-blanco enviar-btn full-width">ENVIAR CONFIRMACIÓN</button>
+                   <p id="mensaje-exito">¡Gracias! Confirmación enviada.</p>
+               </form>
+           </article>
+
+           <article class="bloque-info estilo-oscuro solo-estandar solo-intermedio">
+                <section class="icono-animado-container">
+                    <i class="fab fa-whatsapp icono-bouncing color-blanco" style="font-size: 4rem;"></i>
+                </section>
+                <h3>CONFIRMACIÓN</h3>
+                <p class="texto-detalle">Confirma tu asistencia enviándonos un mensaje.</p>
+                <a href="https://wa.me/549XXXXXXX?text=Hola!%20Confirmo%20mi%20asistencia" target="_blank" class="boton-mapa btn-blanco">
+                    ENVIAR WHATSAPP
+                </a>
+           </article>
+
+           <article class="bloque-info estilo-claro" id="seccion-regalos">
+               <section class="icono-animado-container"><i class="fas fa-gift icono-bouncing color-verde"></i></section>
+               <h3>REGALOS</h3>
+               <p class="texto-detalle">El mejor regalo es tu presencia. Si deseas hacernos un presente:</p>
                <section class="contenedor-cbu">
                    <article> 
                        <section class="caja-cbu">
-                          <p class="dato-banco">MARTINA:</p>
+                          <p class="dato-banco">ALIAS:</p>
                           <section>
                               <p class="valor-dato">lm.baigorria</p> 
-                              <button class="boton-copiar" onclick="copiarCBU('lm.baigorria','aviso-martina')">
-                                  <i class="far fa-copy"></i>
-                              </button>
+                              <button class="boton-copiar" onclick="copiarCBU('lm.baigorria','aviso-martina')"><i class="far fa-copy"></i></button>
                           </section> 
                        </section>
-                       <p class="mensaje-copiado" id="aviso-martina" style="display: none;">¡Alias copiado!</p>
-                    </article>
-
-                    <article>
-                        <article class="caja-cbu">
-                            <p class="dato-banco">VALENTINA:</p>
-                            <section>
-                                <p class="valor-dato alias-texto">lv.baigorria20</p> 
-                                <button class="boton-copiar" onclick="copiarCBU('lv.baigorria20','aviso-valentina')">
-                                    <i class="far fa-copy"></i>
-                                </button>
-                            </section>
-                        </article>
-                        <p class="mensaje-copiado" id="aviso-valentina" style="display: none;">¡Alias copiado!</p>
-                    </article>
-                </section>
-            </article>
-
-            <!----- CAPSULA DEL TIEMPO -----> 
-            <article class="bloque-info estilo-premium" id="seccion-capsula">
-                <i class="fas fa-hourglass-half icono-bouncing icono-grande"></i>
-                <h3>CÁPSULA DEL TIEMPO</h3>
-                <p class="texto-detalle">
-                    Queremos atesorar tus deseos para siempre. Déjanos un mensaje, anécdota o video que leeremos después de la fiesta.
-                </p>
-                <button class="boton-mapa btn-premium-fill">
-                    DEJAR UN RECUERDO
-                </button>
-            </article>
-
-
-            <!----- link spotify ----->
-            <article class="bloque-info estilo-oscuro">
-        
-                <section class="icono-animado-container">
-                    <i class="fab fa-spotify icono-bouncing color-blanco"></i>
-                </section>
-                
-                <h3>MÚSICA</h3>
-                <p class="texto-detalle">
-                    ¡Agrega las canciones que no pueden faltar!
-                </p>
-
-                <a href="https://open.spotify.com/playlist/6kbRFX8PLQAOdUwATuoCex?si=HJsPsVuYTY6p6gXSMw3m-w&pt=a0d4b75d9a1d0ff03193a80054f3caa4&pi=ZRSLPJ-hTY6MN" target="_blank" class="boton-mapa btn-blanco">
-                    SUGERIR CANCIONES
-                </a>
-
-            </article>
-     </section>
-
-     <!----- ultima imagen  ----->
-     <section class="seccion-imagen">
-        <figure><img src="img/sesion10.jpg" alt=""></figure>
-     </section>
-
-     <!----- seccion "te esperamos"  ----->
-     <seccion class="bloque-info estilo-claro cierre-pagina">
-            <h2 class="titulo-final">¡TE ESPERAMOS!</h2>
-            
-           <article class="icono-animado-container" style="margin-top: 20px;">
-            <i class="fas fa-heart color-verde icono-latido"></i>
+                       <p class="mensaje-copiado" id="aviso-martina" style="display: none;">¡Copiado!</p>
+                   </article>
+               </section>
            </article>
-     </seccion>
+
+           <article class="bloque-info estilo-premium solo-premium" id="seccion-capsula">
+               <i class="fas fa-hourglass-half icono-bouncing icono-grande"></i>
+               <h3>CÁPSULA DEL TIEMPO</h3>
+               <p class="texto-detalle">Déjanos un mensaje para el futuro.</p>
+               <button class="boton-mapa btn-premium-fill">DEJAR UN RECUERDO</button>
+           </article>
+
+           <article class="bloque-info estilo-oscuro solo-premium">
+               <section class="icono-animado-container"><i class="fab fa-spotify icono-bouncing color-blanco"></i></section>
+               <h3>MÚSICA</h3>
+               <p class="texto-detalle">¡Sugerí canciones para la fiesta!</p>
+               <a href="#" class="boton-mapa btn-blanco">SUGERIR CANCIONES</a>
+           </article>
+       </section>
+
+       <section class="seccion-imagen">
+          <figure><img src="img/sesion10.jpg" alt=""></figure>
+       </section>
+
+       <seccion class="bloque-info estilo-claro cierre-pagina">
+            <h2 class="titulo-final">¡TE ESPERAMOS!</h2>
+            <article class="icono-animado-container" style="margin-top: 20px;">
+                <i class="fas fa-heart color-verde icono-latido"></i>
+            </article>
+       </seccion>
     
-     <!----- franja de color final  ----->
-     <footer class="footer-simple">
-           <p>XV Años | 20.03.2026</p>
-     </footer>
-
-    </main>
-
-    <script src="js/main.js"></script>
-
-    <!-- PESTAÑA INTERNA CAPSULA DEL TIEMPO -->
-    <section id="modal-capsula" class="modal-overlay">
-    <article class="modal-contenido estilo-premium">
-        <span class="cerrar-modal" id="btn-cerrar-capsula">&times;</span>
-        
-        <section class="modal-header">
-            <i class="fas fa-box-open icono-grande"></i>
-            <h3>CÁPSULA DEL TIEMPO</h3>
-            <p>Deja un mensaje y una foto que se revelarán en el futuro.</p>
-        </section>
-
-        <form id="form-capsula">
-            <input type="hidden" name="tipoFormulario" value="capsula">
-            <section class="campo-form">
-                <input type="text" id="capsula-nombre" name="nombre" placeholder="Tu Nombre" required>
+       <footer>
+            <section class="footer-content">
+                <div class="footer-brand">
+                    <img src="img/sin-fondo-claro.png" alt="TuTarjeta" class="footer-logo">
+                    <p>Invitaciones que conectan.</p>
+                </div>
+                <nav class="footer-social">
+                    <a href="https://instagram.com/tutarjeta.ar" target="_blank" class="btn-social">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="https://wa.me/549XXXX" target="_blank" class="btn-social">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </nav>
             </section>
-            
-            <section class="campo-form">
-                <textarea id="capsula-mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje para el futuro..." required></textarea>
-            </section>
+        </footer>
 
-            <section class="campo-form">
-                <label for="capsula-foto" class="label-foto">
-                    <i class="fas fa-camera"></i> Subir una foto (Opcional)
-                </label>
-                <input type="file" id="capsula-foto" name="foto" accept="image/*" style="display: none;">
-                <p id="nombre-archivo" style="font-size: 0.8rem; margin-top: 5px;">Ningún archivo seleccionado</p>
-            </section>
+   </main>
 
-            <button type="submit" id="btn-enviar-capsula" class="boton-mapa btn-premium-fill">
-                GUARDAR RECUERDO
-            </button>
-            
-            <p id="feedback-capsula" style="display: none; margin-top:10px; font-weight: bold;"></p>
-        </form>
-    </article>
-    </section>
+   <script src="js/main.js"></script>
+
+   <section id="modal-capsula" class="modal-overlay solo-premium">
+       <article class="modal-contenido estilo-premium">
+            <span class="cerrar-modal" id="btn-cerrar-capsula">×</span>
+            <section class="modal-header"><h3>CÁPSULA</h3></section>
+            <form id="form-capsula">
+                <button type="submit" id="btn-enviar-capsula" class="boton-mapa btn-premium-fill">GUARDAR</button>
+            </form>
+        </article>
+   </section>
+
 </body>
 </html>

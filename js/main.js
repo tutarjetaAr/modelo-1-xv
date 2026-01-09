@@ -1,3 +1,31 @@
+// ==========================================
+// 1. ESCUCHA DE MENSAJES (LANDING PAGE)
+// ==========================================
+window.addEventListener("message", (event) => {
+    // Seguridad: Puedes validar event.origin si quieres ser estricto
+    
+    // Verificamos si es un mensaje de cambio de plan
+    if (event.data && event.data.tipo === 'cambioPlan') {
+        const nuevoPlan = event.data.plan;
+        console.log("Modo Demo activado: " + nuevoPlan);
+        
+        // Cambiamos el atributo en el body
+        // Esto dispara las reglas CSS que agregamos al final de estilo1.css
+        document.body.setAttribute('data-plan', nuevoPlan);
+
+        // Opcional: Si el plan es Estándar (que no tiene música), pausamos el audio si suena
+        if (nuevoPlan === 'estandar') {
+            const audio = document.getElementById('musica');
+            if(audio && !audio.paused) {
+                audio.pause();
+                // Resetear icono botón flotante si existe
+                // ... lógica de tu botón flotante ...
+            }
+        }
+    }
+});
+
+
 // LOGICA DEL BOTON FLOTANTE DE MUSICA
 const portada = document.getElementById('primera-p'); 
 const btnIngresar = document.getElementById('boton-ingresar'); 
