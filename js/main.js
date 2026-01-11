@@ -2,33 +2,48 @@
 // 1. ESCUCHA DE MENSAJES (LANDING PAGE)
 // ==========================================
 window.addEventListener("message", (event) => {
+    // Validamos que sea el mensaje correcto
     if (event.data && event.data.tipo === 'cambioPlan') {
-        const { plan, invitado, pases } = event.data; // Desempaquetamos los datos
+        const { plan, invitado, pases } = event.data; 
         
-        console.log("Modo Demo: " + plan);
+        console.log("Modo Demo activado: " + plan);
         
-        // 1. CAMBIAR EL PLAN (CSS)
+        // 1. CAMBIAR EL PLAN (Activa/Desactiva secciones por CSS)
         document.body.setAttribute('data-plan', plan);
 
-        // 2. INYECTAR DATOS FALSOS (DOM)
-        // Solo si nos mandaron un nombre y el plan es premium
+        // Referencias a las cajas que suelen estar ocultas
+        const bannerBienvenida = document.getElementById('bienvenida-premium');
+        const boxPases = document.getElementById('mensaje-cantidad');
+
+        // 2. LÓGICA PARA PREMIUM (Mostrar datos falsos)
         if (plan === 'premium' && invitado) {
             
-            // Cambiamos el Título de Bienvenida
+            // A) MOSTRAR LA CAJA DE BIENVENIDA (¡Esto era lo que faltaba!)
+            if (bannerBienvenida) {
+                bannerBienvenida.style.display = 'block';
+                // Animación extra para que se note el cambio
+                bannerBienvenida.style.animation = 'subirAparecer 0.5s ease forwards';
+            }
+
+            // B) CAMBIAR EL TEXTO DEL NOMBRE
             const tituloNombre = document.getElementById('nombre-invitado-dinamico');
             if (tituloNombre) tituloNombre.textContent = invitado;
 
-            // Cambiamos la cantidad de pases (para el formulario)
+            // C) CAMBIAR PASES Y MOSTRAR AVISO EN FORMULARIO
             const spanPases = document.getElementById('escribir');
-            const boxPases = document.getElementById('mensaje-cantidad');
             
             if (spanPases && pases) {
                 spanPases.textContent = pases;
                 if(boxPases) boxPases.style.display = 'block';
             }
+
+        } else {
+            // Si cambian a Estándar o Intermedio, volvemos a ocultar la bienvenida personalizada
+            if (bannerBienvenida) bannerBienvenida.style.display = 'none';
+            if (boxPases) boxPases.style.display = 'none';
         }
 
-        // Lógica de audio (Pausar si es estándar)
+        // 3. LÓGICA DE AUDIO (Pausar si bajan a estándar)
         if (plan === 'estandar') {
             const audio = document.getElementById('musica');
             if(audio && !audio.paused) audio.pause();
