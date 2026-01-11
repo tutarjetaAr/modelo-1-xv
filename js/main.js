@@ -2,25 +2,36 @@
 // 1. ESCUCHA DE MENSAJES (LANDING PAGE)
 // ==========================================
 window.addEventListener("message", (event) => {
-    // Seguridad: Puedes validar event.origin si quieres ser estricto
-    
-    // Verificamos si es un mensaje de cambio de plan
     if (event.data && event.data.tipo === 'cambioPlan') {
-        const nuevoPlan = event.data.plan;
-        console.log("Modo Demo activado: " + nuevoPlan);
+        const { plan, invitado, pases } = event.data; // Desempaquetamos los datos
         
-        // Cambiamos el atributo en el body
-        // Esto dispara las reglas CSS que agregamos al final de estilo1.css
-        document.body.setAttribute('data-plan', nuevoPlan);
+        console.log("Modo Demo: " + plan);
+        
+        // 1. CAMBIAR EL PLAN (CSS)
+        document.body.setAttribute('data-plan', plan);
 
-        // Opcional: Si el plan es Estándar (que no tiene música), pausamos el audio si suena
-        if (nuevoPlan === 'estandar') {
-            const audio = document.getElementById('musica');
-            if(audio && !audio.paused) {
-                audio.pause();
-                // Resetear icono botón flotante si existe
-                // ... lógica de tu botón flotante ...
+        // 2. INYECTAR DATOS FALSOS (DOM)
+        // Solo si nos mandaron un nombre y el plan es premium
+        if (plan === 'premium' && invitado) {
+            
+            // Cambiamos el Título de Bienvenida
+            const tituloNombre = document.getElementById('nombre-invitado-dinamico');
+            if (tituloNombre) tituloNombre.textContent = invitado;
+
+            // Cambiamos la cantidad de pases (para el formulario)
+            const spanPases = document.getElementById('escribir');
+            const boxPases = document.getElementById('mensaje-cantidad');
+            
+            if (spanPases && pases) {
+                spanPases.textContent = pases;
+                if(boxPases) boxPases.style.display = 'block';
             }
+        }
+
+        // Lógica de audio (Pausar si es estándar)
+        if (plan === 'estandar') {
+            const audio = document.getElementById('musica');
+            if(audio && !audio.paused) audio.pause();
         }
     }
 });
@@ -168,7 +179,7 @@ const datosEvento = {
 };
 
 // 2° armar url
-const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(datosEvento.titulo)}&dates=${datosEvento.inicio}/${datosEvento.fin}&details=${encodeURIComponent(datosEvento.descripcion)}&location=${encodeURIComponent(datosEvento.ubicacion)}&ctz=America/Argentina/Tucuman`;
+const googleCalendarUrl = ``;
 
 // 3° abrir y agendar
 const btnAgenda = document.getElementById('btn-agendar-calendario');
@@ -246,67 +257,15 @@ btnIzquierdaAuto.addEventListener('click', () => {
 
 
 // --- FORMULARIO ---
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxVyr8Rz8GPTzG_Jn9jn1drEA_PVcv4bVAHPM6sYrQJqllKiY3wPkUtiLdDWp48JtWj/exec';
+const scriptURL = '';
 
 // Elementos del DOM
 const form = document.getElementById('form-rsvp');
 const btnEnviar = document.getElementById('btn-enviar');
 const msgExito = document.getElementById('mensaje-exito');
 const inputNombre = document.getElementById('nombre');
-const dataList = document.getElementById('lista-invitados');
 
 const inputHiddenCantidad = document.getElementById('cantidad_total');
-
-// Variable global
-let baseDatosInvitados = []; 
-
-// ==========================================
-// 1. CARGAR LISTA
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    inputNombre.placeholder = "Cargando lista...";
-    inputNombre.disabled = true;
-
-    fetch(scriptURL)
-        .then(response => response.json())
-        .then(data => {
-            baseDatosInvitados = data; 
-
-            // Llenamos el DataList
-            baseDatosInvitados.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.nombre; 
-                dataList.appendChild(option);
-            });
-
-            inputNombre.placeholder = "Busca tu nombre o familia...";
-            inputNombre.disabled = false;
-            
-            checkUrlParams();
-        })
-        .catch(error => {
-            console.error("Error cargando lista:", error);
-            inputNombre.placeholder = "Error de conexión. Intenta recargar.";
-            inputNombre.disabled = false;
-        });
-});
-
-// ==========================================
-// 2. LÓGICA DE BÚSQUEDA (SILENCIOSA)
-// ==========================================
-inputNombre.addEventListener('input', () => {
-    const valorActual = inputNombre.value;
-    const invitadoEncontrado = baseDatosInvitados.find(i => i.nombre === valorActual);
-
-    if (invitadoEncontrado) {        
-        const cant = invitadoEncontrado.cantidad || 1;
-        inputHiddenCantidad.value = cant;
-
-    } else {
-        // Si escribe un nombre nuevo, asumimos 1 persona
-        inputHiddenCantidad.value = "1"; 
-    }
-});
 
 // ==========================================
 // 3. ENVÍO DEL FORMULARIO
